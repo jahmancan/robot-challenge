@@ -4,8 +4,9 @@ import {
    withMethods,
    patchState,
    withProps,
+   withComputed,
 } from '@ngrx/signals';
-import { inject } from '@angular/core';
+import { computed, inject } from '@angular/core';
 import { GridState } from './models/grid-state';
 import { Rotation } from '../shared/enums';
 import { GridService } from './grid.service';
@@ -33,7 +34,7 @@ export const GridStore = signalStore(
          }
       },
       place: (state: GridState) => {
-         if (service.canPlace(state.x, state.y)) {
+         if (service.canPlace(state)) {
             patchState(store, state);
          }
       },

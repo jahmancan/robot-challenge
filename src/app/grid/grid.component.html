@@ -1,9 +1,11 @@
-
 <app-placing-form (onSubmit)="place($event)"></app-placing-form>
-<button (click)="left()">Left</button>
-<button (click)="right()">Right</button>
-<button (click)="move()">Move</button>
-<button (click)="report()">Report</button>
+
+<div class="actions">
+    <button mat-button [disabled]="store.x() === null || store.y() === null || store.direction() === null" (click)="left()">Left</button>
+    <button mat-button [disabled]="store.x() === null || store.y() === null || store.direction() === null" (click)="right()">Right</button>
+    <button mat-button [disabled]="store.x() === null || store.y() === null || store.direction() === null" (click)="move()">Move</button>
+    <button mat-button (click)="report()">Report</button>
+</div>
 
 <div class="grid-container">
     <div *ngFor="let i of rows" class="row">
@@ -12,3 +14,4 @@
         </app-field>
     </div>
 </div>
+

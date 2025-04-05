@@ -4,14 +4,14 @@ import { Coordinates, GridState } from './models';
 
 @Injectable()
 export class GridService {
-   canPlace(x: number | null, y: number | null): boolean {
+   canPlace(coordinates: Coordinates): boolean {
       return (
-         !!x &&
-         !!y &&
-         x > 0 &&
-         y > 0 &&
-         x < GRID_DIMENSION &&
-         y < GRID_DIMENSION
+         coordinates.x !== null &&
+         coordinates.y !== null &&
+         coordinates.x >= 0 &&
+         coordinates.y >= 0 &&
+         coordinates.x < GRID_DIMENSION &&
+         coordinates.y < GRID_DIMENSION
       );
    }
 
