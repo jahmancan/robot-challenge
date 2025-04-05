@@ -15,27 +15,31 @@ export class GridService {
       );
    }
 
-   move(state: GridState): Coordinates | undefined {
-      if (state.x === null || state.y === null) {
+   move(currentState: GridState): Coordinates | undefined {
+      if (currentState.x === null || currentState.y === null) {
          return undefined;
       }
-      if (!state.direction) {
+      if (!currentState.direction) {
          return undefined;
       }
 
-      switch (state.direction) {
+      switch (currentState.direction) {
          case Direction.north:
-            return state.y < GRID_DIMENSION - 1
-               ? { x: state.x, y: state.y + 1 }
+            return currentState.y < GRID_DIMENSION - 1
+               ? { x: currentState.x, y: currentState.y + 1 }
                : undefined;
          case Direction.east:
-            return state.x < GRID_DIMENSION - 1
-               ? { x: state.x + 1, y: state.y }
+            return currentState.x < GRID_DIMENSION - 1
+               ? { x: currentState.x + 1, y: currentState.y }
                : undefined;
          case Direction.south:
-            return state.y > 0 ? { x: state.x, y: state.y - 1 } : undefined;
+            return currentState.y > 0
+               ? { x: currentState.x, y: currentState.y - 1 }
+               : undefined;
          case Direction.west:
-            return state.x > 0 ? { x: state.x - 1, y: state.y } : undefined;
+            return currentState.x > 0
+               ? { x: currentState.x - 1, y: currentState.y }
+               : undefined;
       }
    }
 
