@@ -1,0 +1,17 @@
+.wrapper {
+    width: 100%;
+
+    .title-bar {
+        width: 100%;
+        background: linear-gradient(90deg, rgba(175,9,100,1) 0%, rgba(0,212,255,1) 100%);
+        color: white;
+    }
+
+    .content {
+        max-width: 760px;
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        margin: 0 auto;
+    }
+}
