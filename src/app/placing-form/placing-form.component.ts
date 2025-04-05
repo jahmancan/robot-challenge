@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import {
    FormControl,
    FormGroup,
@@ -37,29 +37,34 @@ interface PlaceForm {
 })
 export class PlacingFormComponent {
    readonly directions: any[];
-   readonly maxValue = GRID_DIMENSION - 1;
-   readonly form = new FormGroup<PlaceForm>({
-      x: new FormControl(null, [
-         Validators.required,
-         Validators.min(0),
-         Validators.max(this.maxValue),
-      ]),
-      y: new FormControl(null, [
-         Validators.required,
-         Validators.min(0),
-         Validators.max(this.maxValue),
-      ]),
-      direction: new FormControl(null, [Validators.required]),
-   });
+   readonly maxValue: number;
+   readonly form: FormGroup;
 
    @Output()
    readonly onSubmit = new EventEmitter<GridState>();
 
-   constructor() {
+   constructor(
+      @Inject(GRID_DIMENSION)
+      readonly gridDimension: number
+   ) {
       this.directions = Object.keys(Direction).map((key: string) => ({
          value: key,
          name: key,
       }));
+      this.maxValue = gridDimension - 1;
+      this.form = new FormGroup<PlaceForm>({
+         x: new FormControl(null, [
+            Validators.required,
+            Validators.min(0),
+            Validators.max(this.maxValue),
+         ]),
+         y: new FormControl(null, [
+            Validators.required,
+            Validators.min(0),
+            Validators.max(this.maxValue),
+         ]),
+         direction: new FormControl(null, [Validators.required]),
+      });
    }
 
    submit() {

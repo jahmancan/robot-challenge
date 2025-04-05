@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+   ChangeDetectionStrategy,
+   Component,
+   Inject,
+   inject,
+} from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -19,7 +24,11 @@ import { ReportComponent } from '../report/report.component';
       MatDialogModule,
       PlacingFormComponent,
    ],
-   providers: [GridStore, GridService],
+   providers: [
+      GridStore,
+      GridService,
+      { provide: GRID_DIMENSION, useValue: 5 },
+   ],
    templateUrl: './grid.component.html',
    styleUrl: './grid.component.scss',
    changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,8 +36,17 @@ import { ReportComponent } from '../report/report.component';
 export class GridComponent {
    readonly store = inject(GridStore);
    readonly dialog = inject(MatDialog);
-   readonly columns = [...Array(GRID_DIMENSION).keys()];
-   readonly rows = [...Array(GRID_DIMENSION).keys()].reverse();
+
+   readonly columns: Array<number>;
+   readonly rows: Array<number>;
+
+   constructor(
+      @Inject(GRID_DIMENSION)
+      private readonly gridDimension: number
+   ) {
+      this.columns = [...Array(GRID_DIMENSION).keys()];
+      this.rows = [...Array(GRID_DIMENSION).keys()].reverse();
+   }
 
    left(): void {
       this.store.rotate(Rotation.left);

@@ -1,1 +1,1 @@
-export * from './grid-dimension';
+export * from './grid-dimension.injection-token';
