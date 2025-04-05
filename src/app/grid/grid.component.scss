@@ -1,0 +1,19 @@
+.grid-container {
+    display: flex;
+    flex-direction: column;
+    
+    $dimension: 760px;
+    height: $dimension;
+    width: $dimension;
+    border: 1px solid darkslategray;
+    
+    .row {
+        display: flex;
+        flex-direction: row;
+
+        .field {
+            display: block;
+
+        }
+    }
+}

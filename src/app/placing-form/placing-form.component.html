@@ -1,0 +1,11 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <label for="x">X</label>
+    <input type="number" formControlName="x"/>
+    <label for="y">Y</label>
+    <input type="number" formControlName="y"/>
+    <label for="direction">Facing</label>
+    <select formControlName="direction">
+        <option *ngFor="let x of directions" [value]="x.value">{{ x.name }}</option>
+    </select>
+    <button type="submit">Place</button>
+</form>

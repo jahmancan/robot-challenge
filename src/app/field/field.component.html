@@ -1,0 +1,10 @@
+<div class="field" 
+    [ngClass]="{ 
+        'selected': isSelected, 
+        'north':    isSelected && direction === Direction.north, 
+        'east':     isSelected && direction === Direction.east,
+        'south':    isSelected && direction === Direction.south, 
+        'west':     isSelected && direction === Direction.west 
+    }">
+    <ng-content></ng-content>
+</div>

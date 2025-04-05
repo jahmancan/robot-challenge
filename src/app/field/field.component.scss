@@ -1,0 +1,31 @@
+.field {
+    $dimension: 150px;
+    width: $dimension;
+    height: $dimension;
+    border: 1px solid darkslategray;
+
+    &.selected {
+        background: {
+            image: url('/assets/images/robot.jpg');
+            position: center;
+            repeat: no-repeat;
+        };
+
+        &.north {
+            
+            transform: rotate(0);
+        }
+
+        &.east {
+            transform: rotate(90deg);
+        }
+
+        &.south {
+            transform: rotate(180deg);
+        }
+
+        &.west {
+            transform: rotate(270deg);
+        }
+    }
+}
