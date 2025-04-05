@@ -1,4 +1,15 @@
-<h3>Report</h3>
-<p>x: {{ x }}</p>
-<p>y: {{ y }}</p>
-<p>facing: {{ direction }}</p>
+<h2 mat-dialog-title>Report</h2>
+<mat-dialog-content *ngIf="state.x !== null && state.y !== null && state.direction !== null; else empty">
+    <p>x: {{ state.x }}</p>
+    <p>y: {{ state.y }}</p>
+    <p>facing: {{ state.direction }}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
+
+<ng-template #empty>
+    <mat-dialog-content>
+        <p>The robot is not yet placed on the grid</p>
+    </mat-dialog-content>
+</ng-template>

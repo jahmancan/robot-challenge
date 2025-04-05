@@ -1,19 +1,28 @@
-import { Component, Input } from '@angular/core';
-import { Direction } from '../shared';
+import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import {
+   MAT_DIALOG_DATA,
+   MatDialogActions,
+   MatDialogClose,
+   MatDialogContent,
+   MatDialogTitle,
+} from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { GridState } from '../+state';
 
 @Component({
    selector: 'app-report',
-   imports: [],
+   imports: [
+      CommonModule,
+      MatButtonModule,
+      MatDialogTitle,
+      MatDialogContent,
+      MatDialogActions,
+      MatDialogClose,
+   ],
    templateUrl: './report.component.html',
    styleUrl: './report.component.scss',
 })
 export class ReportComponent {
-   @Input()
-   x: number | null = null;
-
-   @Input()
-   y: number | null = null;
-
-   @Input()
-   direction: Direction | null = null;
+   readonly state = inject<GridState>(MAT_DIALOG_DATA);
 }

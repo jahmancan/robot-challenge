@@ -1,14 +1,24 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+
 import { GridService, GridState, GridStore } from '../+state';
-import { Rotation } from '../shared/enums';
+import { GRID_DIMENSION, Rotation } from '../shared';
 import { FieldComponent } from '../field/field.component';
 import { PlacingFormComponent } from '../placing-form/placing-form.component';
-import { GRID_DIMENSION } from '../shared';
+import { ReportComponent } from '../report/report.component';
 
 @Component({
    selector: 'app-grid',
-   imports: [CommonModule, FieldComponent, PlacingFormComponent],
+   imports: [
+      CommonModule,
+      FieldComponent,
+      MatButtonModule,
+      MatDialogModule,
+      PlacingFormComponent,
+   ],
    providers: [GridStore, GridService],
    templateUrl: './grid.component.html',
    styleUrl: './grid.component.scss',
@@ -16,6 +26,7 @@ import { GRID_DIMENSION } from '../shared';
 })
 export class GridComponent {
    readonly store = inject(GridStore);
+   readonly dialog = inject(MatDialog);
    readonly columns = [...Array(GRID_DIMENSION).keys()];
    readonly rows = [...Array(GRID_DIMENSION).keys()].reverse();
 
@@ -35,5 +46,13 @@ export class GridComponent {
       this.store.place(state);
    }
 
-   report(): void {}
+   report(): void {
+      this.dialog.open(ReportComponent, {
+         data: {
+            x: this.store.x(),
+            y: this.store.y(),
+            direction: this.store.direction(),
+         },
+      });
+   }
 }
