@@ -42,10 +42,10 @@ export class GridComponent {
 
    constructor(
       @Inject(GRID_DIMENSION)
-      private readonly gridDimension: number
+      readonly gridDimension: number
    ) {
-      this.columns = [...Array(GRID_DIMENSION).keys()];
-      this.rows = [...Array(GRID_DIMENSION).keys()].reverse();
+      this.columns = [...Array(gridDimension).keys()];
+      this.rows = [...Array(gridDimension).keys()].reverse();
    }
 
    left(): void {
