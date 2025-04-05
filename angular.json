@@ -39,7 +39,17 @@
             "scripts": []
           },
           "configurations": {
+            "analyze-bundle": {
+              "sourceMap": true,
+              "outputHashing": "none",
+              "namedChunks": true
+            },
             "production": {
+              "sourceMap": false,
+              "optimization": true,
+              "extractLicenses": true,
+              "namedChunks": true,
+              "aot": true,
               "budgets": [
                 {
                   "type": "initial",
