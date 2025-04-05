@@ -1,17 +1,19 @@
 <app-placing-form (onSubmit)="place($event)"></app-placing-form>
 
-<div class="actions">
-    <button mat-button [disabled]="store.x() === null || store.y() === null || store.direction() === null" (click)="left()">Left</button>
-    <button mat-button [disabled]="store.x() === null || store.y() === null || store.direction() === null" (click)="right()">Right</button>
-    <button mat-button [disabled]="store.x() === null || store.y() === null || store.direction() === null" (click)="move()">Move</button>
-    <button mat-button (click)="report()">Report</button>
-</div>
+<div class="grid">
+    <div class="grid-container">
+        <div *ngFor="let i of rows" class="row">
+            <app-field *ngFor="let j of columns" [isSelected]="i === store.y() && j === store.x()" [direction]="store.direction()">
+                {{ i }}, {{ j }}
+            </app-field>
+        </div>
+    </div>
 
-<div class="grid-container">
-    <div *ngFor="let i of rows" class="row">
-        <app-field *ngFor="let j of columns" [isSelected]="i === store.y() && j === store.x()" [direction]="store.direction()">
-            {{ i }}, {{ j }}
-        </app-field>
+    <div class="actions">
+        <button mat-button [disabled]="store.x() === null || store.y() === null || store.direction() === null" (click)="left()">Left</button>
+        <button mat-button [disabled]="store.x() === null || store.y() === null || store.direction() === null" (click)="right()">Right</button>
+        <button mat-button [disabled]="store.x() === null || store.y() === null || store.direction() === null" (click)="move()">Move</button>
+        <button mat-button (click)="report()">Report</button>
     </div>
 </div>
 

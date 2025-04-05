@@ -1,14 +1,16 @@
 .field {
-    $dimension: 150px;
+    $dimension: 75px;
     width: $dimension;
     height: $dimension;
     border: 1px solid darkslategray;
+    box-sizing: content-box;
 
     &.selected {
         background: {
             image: url('/assets/images/robot.jpg');
             position: center;
             repeat: no-repeat;
+            size: 125%;
         };
 
         &.north {

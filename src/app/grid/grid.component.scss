@@ -1,25 +1,30 @@
-.actions {
+.grid {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 25px;
-}
+    justify-content: center;
 
-.grid-container {
-    display: flex;
-    flex-direction: column;
-    
-    $dimension: 760px;
-    height: $dimension;
-    width: $dimension;
-    border: 1px solid darkslategray;
-    
-    .row {
+    .actions {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        margin-left: 25px;
 
-        .field {
-            display: block;
+        button {
+            margin-bottom: 20px;
+        }
 
+    }
+    
+    .grid-container {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 50px;
+        
+        $dimension: 382px;
+        height: $dimension;
+        width: $dimension;
+        border: 1px solid darkslategray;
+        
+        .row {
+            display: flex;
         }
     }
 }
