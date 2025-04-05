@@ -1,11 +1,35 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
-    <label for="x">X</label>
-    <input type="number" formControlName="x"/>
-    <label for="y">Y</label>
-    <input type="number" formControlName="y"/>
-    <label for="direction">Facing</label>
-    <select formControlName="direction">
-        <option *ngFor="let x of directions" [value]="x.value">{{ x.name }}</option>
-    </select>
-    <button type="submit">Place</button>
+    <mat-form-field>
+        <mat-label for="x">X</mat-label>
+        <input type="number" matInput formControlName="x" placeholder="column value"/>
+        <mat-hint>min - max values: 0 - {{ maxValue }}</mat-hint>
+        <mat-error *ngIf="form.controls.x.dirty && form.controls.x.errors?.['required']">column value is required and has to be a number.</mat-error>
+        <mat-error *ngIf="form.controls.x.errors?.['min']">
+          Value has to be larger or equal than 0
+        </mat-error>
+        <mat-error *ngIf="form.controls.x.errors?.['max']">
+            Value has to be smaller or equal than {{ maxValue }}
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label for="y">Y</mat-label>
+        <input type="number" matInput formControlName="y" placeholder="row value"/>
+        <mat-hint>min - max values: 0 - {{ maxValue }}</mat-hint>
+        <mat-error *ngIf="form.controls.y.dirty && form.controls.y.errors?.['required']">row value is required and has to be a number.</mat-error>
+        <mat-error *ngIf="form.controls.y.errors?.['min']">
+          Value has to be larger or equal than 0
+        </mat-error>
+        <mat-error *ngIf="form.controls.y.errors?.['max']">
+            Value has to be smaller or equal than {{ maxValue }}
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label for="direction">Facing</mat-label>
+        <mat-select formControlName="direction">
+            <mat-option *ngFor="let x of directions" [value]="x.value">{{ x.name | titlecase }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls.direction.dirty && form.controls.direction.errors?.['required']">column value is required.</mat-error>
+    </mat-form-field>
+
+    <button mat-flat-button type="submit">Place</button>
 </form>

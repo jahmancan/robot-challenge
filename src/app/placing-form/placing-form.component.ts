@@ -7,11 +7,15 @@ import {
    ReactiveFormsModule,
    Validators,
 } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+
 import { GridState } from '../+state';
 import { Direction, GRID_DIMENSION } from '../shared';
-import { UtilService } from '../grid/util.service';
 
-interface GridForm {
+interface PlaceForm {
    x: FormControl<number | null>;
    y: FormControl<number | null>;
    direction: FormControl<Direction | null>;
@@ -19,22 +23,31 @@ interface GridForm {
 
 @Component({
    selector: 'app-placing-form',
-   imports: [CommonModule, FormsModule, ReactiveFormsModule],
+   imports: [
+      CommonModule,
+      FormsModule,
+      MatButtonModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatSelectModule,
+      ReactiveFormsModule,
+   ],
    templateUrl: './placing-form.component.html',
    styleUrl: './placing-form.component.scss',
 })
 export class PlacingFormComponent {
    readonly directions: any[];
-   readonly form = new FormGroup<GridForm>({
+   readonly maxValue = GRID_DIMENSION - 1;
+   readonly form = new FormGroup<PlaceForm>({
       x: new FormControl(null, [
          Validators.required,
          Validators.min(0),
-         Validators.max(GRID_DIMENSION - 1),
+         Validators.max(this.maxValue),
       ]),
       y: new FormControl(null, [
          Validators.required,
          Validators.min(0),
-         Validators.max(GRID_DIMENSION - 1),
+         Validators.max(this.maxValue),
       ]),
       direction: new FormControl(null, [Validators.required]),
    });
@@ -47,7 +60,6 @@ export class PlacingFormComponent {
          value: key,
          name: key,
       }));
-      console.log(this.directions);
    }
 
    submit() {
@@ -57,8 +69,8 @@ export class PlacingFormComponent {
 
       const formValues = this.form.value;
       this.onSubmit.emit({
-         x: UtilService.tryParse(formValues.x),
-         y: UtilService.tryParse(formValues.y),
+         x: formValues.x ?? null,
+         y: formValues.y ?? null,
          direction: formValues.direction ?? null,
       });
    }
