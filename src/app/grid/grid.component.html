@@ -4,7 +4,7 @@
     <div class="grid-container">
         <div *ngFor="let i of rows" class="row">
             <app-field *ngFor="let j of columns" [isSelected]="i === store.y() && j === store.x()" [direction]="store.direction()">
-                {{ i }}, {{ j }}
+                <!-- {{ i }}, {{ j }} -->
             </app-field>
         </div>
     </div>

@@ -3,7 +3,7 @@
     width: $dimension;
     height: $dimension;
     border: 1px solid darkslategray;
-    box-sizing: content-box;
+    box-sizing: border-box;
 
     &.selected {
         background: {
